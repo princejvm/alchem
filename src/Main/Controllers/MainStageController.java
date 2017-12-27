@@ -123,6 +123,7 @@ public class MainStageController implements Initializable {
                     f4 = 1;
                 for(int j=0;j<5;j++){
 
+                    
                     if(j!=finalI){
                         buttons[j].setStyle("-fx-background-color: #200020");
                         panes[j].setStyle("-fx-background-color: #200020");
