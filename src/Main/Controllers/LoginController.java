@@ -5,6 +5,7 @@ import Main.Controllers.NavigationDrawer.UserDrawerController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+//import org.controlsfx.ControlsFXSample;
 
+import org.controlsfx.control.StatusBar;
+import org.controlsfx.control.*;
+import org.controlsfx.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,6 +42,8 @@ public class LoginController {
     @FXML
     private RadioButton wholesaler_toggle, retailer_toggle;
 
+    public StatusBar statusBar;
+
     public void initialize() {
         wholesaler_toggle.setUserData("Wholesaler");
         retailer_toggle.setUserData("Retailer");
@@ -45,6 +52,7 @@ public class LoginController {
     }
 
     public void setOnKeyPressedListener() {
+
         login_password.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode() == KeyCode.ENTER) {
                 login();
@@ -56,6 +64,7 @@ public class LoginController {
             }
         });
     }
+
 
     public void login() {
         int flag = 0, userType = 0, userTypeCheck = 0;

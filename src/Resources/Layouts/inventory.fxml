@@ -18,8 +18,21 @@
                                 <Font name="System Bold" size="15.0" />
                             </font>
                         </Button>
-                        <Label fx:id="searchBy" layoutX="67.0" layoutY="154.0" prefHeight="21.0" prefWidth="103.0" text="Search By" textFill="WHITE" />
-                        <VBox fx:id="searchVBox" layoutX="67.0" layoutY="206.0" prefHeight="200.0" prefWidth="136.0">
+                        <Label fx:id="searchval" layoutX="67.0" layoutY="154.0" prefHeight="21.0" prefWidth="103.0" text="Search Type" textFill="WHITE" />
+                        <VBox fx:id="searchVBox1" layoutX="67.0" layoutY="206.0" prefHeight="50.0" prefWidth="136.0">
+                        <children>
+                            <RadioButton fx:id="linear" mnemonicParsing="false" selected="true" text="Linear Search" textFill="WHITE">
+                                <toggleGroup>
+                                    <ToggleGroup fx:id="searchGroup1" />
+                                </toggleGroup>
+                            </RadioButton>
+                            <Region prefHeight="13.0" prefWidth="136.0" />
+                            <RadioButton fx:id="normal" mnemonicParsing="false" text="Normal Search" textFill="WHITE" toggleGroup="$searchGroup1" />
+
+                        </children>
+                        </VBox>
+                        <Label fx:id="searchBy" layoutX="67.0" layoutY="306.0" prefHeight="21.0" prefWidth="103.0" text="Search By" textFill="WHITE" />
+                        <VBox fx:id="searchVBox" layoutX="67.0" layoutY="356.0" prefHeight="200.0" prefWidth="136.0">
                             <children>
                                 <RadioButton fx:id="medicineButton" mnemonicParsing="false" selected="true" text="Medicine" textFill="WHITE">
                                     <toggleGroup>

@@ -44,6 +44,7 @@ public class SettingsDrawerController implements Initializable {
         buttons.setOnMouseClicked((MouseEvent event) -> {
             try {
                 /*Opening login page*/
+
                 FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/login_stage.fxml"));
                 Parent root1 = (Parent) fxmlMainStage.load();
                 Stage mainStage = new Stage();
