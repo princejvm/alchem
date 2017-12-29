@@ -17,9 +17,10 @@ import java.util.ResourceBundle;
 
 public class MainStageController implements Initializable {
 
+
     private static double drawableStageWidth;
     private static double drawableStageHeight;
-
+    private int f0,f1,f2,f3,f4;
     AnchorPane homePane = null;
     AnchorPane allFeaturesPane = null;
     AnchorPane dashboardPane = null;
@@ -27,9 +28,7 @@ public class MainStageController implements Initializable {
     AnchorPane settingsDrawerPane = null;
     TranslateTransition openNavigation = null;
     TranslateTransition closeNavigation = null;
-    
-    boolean open_user_drawer=false,open_setting_drawer=false;
-    
+
     @FXML
     private Button pane_button1, pane_button2, pane_button21, pane_button3, pane_button4;
     @FXML
@@ -52,6 +51,7 @@ public class MainStageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         /*Set private static variables for Main Stage width and Height*/
+
         drawableStageWidth = switcher_pane.getWidth();
         drawableStageHeight = switcher_pane.getHeight();
 
@@ -70,6 +70,13 @@ public class MainStageController implements Initializable {
         panes[3] = pane4;
         panes[4] = pane21;
 
+
+        f0 = 0;
+        f1 = 0;
+        f2 = 0;
+        f3 = 0;
+        f4 = 0;
+
         for (int i = 0; i < 5; i++) {
             /*Make 'i' effectively final*/
             int finalI = i;
@@ -78,12 +85,76 @@ public class MainStageController implements Initializable {
                 buttons[finalI].setStyle("-fx-background-color: grey");
                 panes[finalI].setStyle("-fx-background-color: aqua ");
 
+
+
             });
 
             buttons[i].setOnMouseExited((event) -> {
                 /*Set CSS styling for buttons and panes 'onMouseEntered'*/
-                buttons[finalI].setStyle("-fx-background-color: #200020");
-                panes[finalI].setStyle("-fx-background-color: #200020");
+                int flag;
+                int i1=finalI;
+                if(i1==0)
+                    flag = f0;
+                else if(i1==1)
+                    flag = f1;
+                else if(i1==2)
+                    flag = f2;
+                else if(i1==3)
+                    flag = f3;
+                else
+                    flag = f4;
+                if(flag==0) {
+                    buttons[finalI].setStyle("-fx-background-color: #200020");
+                    panes[finalI].setStyle("-fx-background-color: #200020");
+                }
+            });
+
+            buttons[i].setOnMouseClicked((event) -> {
+                /*Set CSS styling for buttons and panes 'onMouseEntered'*/
+
+                int i1=finalI;
+                if(i1==0) {
+                    f0 = 1;
+                    f1 = 0;
+                    f2 = 0;
+                    f3 = 0;
+                    f4 = 0;
+                }
+                else if(i1==1) {
+                    f0 = 0;
+                    f1 = 1;
+                    f2 = 0;
+                    f3 = 0;
+                    f4 = 0;
+                }
+                else if(i1==2) {
+                    f0 = 0;
+                    f1 = 0;
+                    f2 = 1;
+                    f3 = 0;
+                    f4 = 0;
+                }
+                else if(i1==3) {
+                    f0 = 0;
+                    f1 = 0;
+                    f2 = 0;
+                    f3 = 1;
+                    f4 = 0;
+                }
+                else {
+                    f0 = 0;
+                    f1 = 0;
+                    f2 = 0;
+                    f3 = 0;
+                    f4 = 1;
+                }
+                for(int k=0;k<5;k++){
+                    if(k!=finalI){
+                        buttons[k].setStyle("-fx-background-color: #200020");
+                        panes[k].setStyle("-fx-background-color: #200020");
+                    }
+
+                }
 
             });
 
@@ -111,7 +182,7 @@ public class MainStageController implements Initializable {
         switcher_pane.getChildren().addAll(dashboardPane);
     }
 
-        public void viewAllFeaturesScene() {
+    public void viewAllFeaturesScene() {
         switcher_pane.getChildren().clear();
         allFeaturesPane.setPrefWidth(drawableStageWidth);
         InventoryController.setDrawableWidth(drawableStageWidth);
@@ -128,15 +199,9 @@ public class MainStageController implements Initializable {
         drawer_parent.getChildren().addAll(userDrawerPane);
 
         /*Play transition set by Initialise()*/
-        if(open_setting_drawer){
-            open_setting_drawer=false;
-            open_user_drawer=true;
-            openNavigation.play();
-        } else if (drawer_parent.getTranslateX() != 0) {
-            open_user_drawer=true;
+        if (drawer_parent.getTranslateX() != 0) {
             openNavigation.play();
         } else {
-            open_user_drawer=false;
             closeNavigation.setToX(-(drawer_parent.getWidth()));
             closeNavigation.play();
         }
@@ -150,18 +215,11 @@ public class MainStageController implements Initializable {
         drawer_parent.getChildren().addAll(settingsDrawerPane);
 
         /*Play transition set by Initialise()*/
-        if(open_user_drawer){
-            open_user_drawer=false;
-            open_setting_drawer=true;
-            openNavigation.play();
-        } else if (drawer_parent.getTranslateX() != 0) {
-            open_setting_drawer=true;
+        if (drawer_parent.getTranslateX() != 0) {
             openNavigation.play();
         } else {
-            open_setting_drawer=false;
             closeNavigation.setToX(-(drawer_parent.getWidth()));
             closeNavigation.play();
         }
     }
 }
-
